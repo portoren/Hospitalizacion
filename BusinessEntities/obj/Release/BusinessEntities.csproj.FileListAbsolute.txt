@@ -1,0 +1,4 @@
+D:\ADSLost\BusinessEntities\bin\Release\BusinessEntities.dll
+D:\ADSLost\BusinessEntities\bin\Release\BusinessEntities.pdb
+D:\ADSLost\BusinessEntities\obj\Release\BusinessEntities.dll
+D:\ADSLost\BusinessEntities\obj\Release\BusinessEntities.pdb

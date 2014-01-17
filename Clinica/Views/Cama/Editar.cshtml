@@ -1,0 +1,95 @@
+﻿@model BusinessEntities.BECama
+
+@{
+    ViewBag.Title = "CUS: Registrar Cama > Modificar Cama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+<h2>Modificar Cama</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BECama</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdCama)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.IdCama, new { @readonly = "readonly" } )
+            @Html.ValidationMessageFor(model => model.IdCama)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Marca)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Marca, (SelectList)ViewBag.ListaMarca)
+            @Html.ValidationMessageFor(model => model.Marca)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Modelo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Modelo)
+            @Html.ValidationMessageFor(model => model.Modelo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoCama)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TipoCama, (SelectList)ViewBag.ListaTipoCama)
+            @Html.ValidationMessageFor(model => model.TipoCama)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModoOperacion)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ModoOperacion, (SelectList)ViewBag.ListaModoOperacion)
+            @Html.ValidationMessageFor(model => model.ModoOperacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoColchon)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TipoColchon, (SelectList)ViewBag.ListaTipoColchon)
+            @Html.ValidationMessageFor(model => model.TipoColchon)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Accesorios) :
+        </div>
+        <div>
+            @for (int i = 0; i < Model.Accesorios.Count; i++)
+            {
+                <div>
+                    @Html.HiddenFor(x => x.Accesorios[i].IdAccesorioCama)
+                    @Html.HiddenFor(x => x.Accesorios[i].Nombre)
+                    @Html.CheckBoxFor(x => x.Accesorios[i].Marcado)
+                    @Html.LabelFor(x => x.Accesorios[i].Marcado, Model.Accesorios[i].Nombre)
+                </div>
+            }
+        </div>
+        @Html.HiddenFor(model => model.Estado)
+        <p>
+            <input type="submit" value="Grabar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

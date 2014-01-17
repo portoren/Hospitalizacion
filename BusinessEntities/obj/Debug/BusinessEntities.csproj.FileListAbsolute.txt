@@ -1,0 +1,5 @@
+D:\trabajos\ADSLost\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+D:\trabajos\ADSLost\BusinessEntities\bin\Debug\BusinessEntities.dll
+D:\trabajos\ADSLost\BusinessEntities\bin\Debug\BusinessEntities.pdb
+D:\trabajos\ADSLost\BusinessEntities\obj\Debug\BusinessEntities.dll
+D:\trabajos\ADSLost\BusinessEntities\obj\Debug\BusinessEntities.pdb

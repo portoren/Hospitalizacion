@@ -1,0 +1,126 @@
+﻿@model BusinessEntities.BEOrdenInternamiento
+
+@{
+    ViewBag.Title = "Asignar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=Numero]").attr('readonly', 'readonly');
+        $("input[name=PacienteNombre]").attr('readonly', 'readonly');
+        $('#IdHabitacion').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            var textSelected = optionSelected.text();
+
+            $("#tipoHabitacion").empty();
+            $.getJSON("/OrdenInternamiento/TipoHabitacion", { IdHabitacion: valueSelected }, function (resultado) {
+                $("#tipoHabitacion").append(resultado);
+            });
+        });
+    });
+</script>
+
+<h2>Asignar</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BEOrdenInternamiento</legend>
+
+        @Html.HiddenFor(model => model.IdOrdenInternamiento)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Numero)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Numero)
+        </div>        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PacienteNombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PacienteNombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HabitacionNombre)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.IdHabitacion, (SelectList)ViewBag.ListaHabitacion, "-- Seleccionar --")
+            @Html.ValidationMessageFor(model => model.IdHabitacion)
+        </div>
+
+        <div class="editor-label">Tipo de Habitacion: </div>
+        <div class="editor-field" id="tipoHabitacion"></div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdCama)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.IdCama, (SelectList)ViewBag.ListaCama, "-- Seleccionar --")
+            @Html.ValidationMessageFor(model => model.IdCama)
+        </div>
+
+        <div class="editor-label">
+            Recurso :
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Recurso", (SelectList)ViewBag.ListaRecurso, "-- Seleccione --")
+        </div>
+        <div class="editor-label">
+            Cantidad :
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("Cantidad", "")
+            <button type="submit" name="operacion" data-val="false" value="agregar-detalle">Agregar Recurso</button>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Recurso</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Recursos != null && Model.Recursos.Count > 0)
+                {
+                    var i = 0;
+                    
+                    foreach (var item in Model.Recursos)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Cantidad) 
+                                @Html.HiddenFor(modelItem => item.Cantidad)
+                                @Html.HiddenFor(modelItem => item.IdOrdenInternamiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RecursoNombre)
+                                @Html.HiddenFor(modelItem => item.RecursoNombre)
+                                @Html.HiddenFor(modelItem => item.Recurso)
+                            </td>
+                            <td><button type="submit" name="operacion" value="eliminar-detalle-@i">Eliminar</button></td>
+                        </tr>
+                    
+                        i++;
+                    }
+                }
+                </tbody>
+            </table>
+        <p>
+            <input type="submit" value="Asignar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

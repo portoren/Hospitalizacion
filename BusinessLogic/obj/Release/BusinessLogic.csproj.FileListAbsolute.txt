@@ -1,0 +1,13 @@
+D:\ADSLost\BusinessLogic\bin\Release\BusinessLogic.dll
+D:\ADSLost\BusinessLogic\bin\Release\BusinessLogic.pdb
+D:\ADSLost\BusinessLogic\bin\Release\BusinessEntities.dll
+D:\ADSLost\BusinessLogic\bin\Release\DataAccess.dll
+D:\ADSLost\BusinessLogic\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\ADSLost\BusinessLogic\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\ADSLost\BusinessLogic\bin\Release\Microsoft.Practices.ServiceLocation.dll
+D:\ADSLost\BusinessLogic\bin\Release\Microsoft.Practices.Unity.dll
+D:\ADSLost\BusinessLogic\bin\Release\BusinessEntities.pdb
+D:\ADSLost\BusinessLogic\bin\Release\DataAccess.pdb
+D:\ADSLost\BusinessLogic\obj\Release\BusinessLogic.csprojResolveAssemblyReference.cache
+D:\ADSLost\BusinessLogic\obj\Release\BusinessLogic.dll
+D:\ADSLost\BusinessLogic\obj\Release\BusinessLogic.pdb

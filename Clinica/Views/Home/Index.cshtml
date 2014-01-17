@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            @*<hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>*@
+           <p>
+                <strong>Integrantes:</strong><br />
+                U201200336 – CARPIO CARPIO, OMAR VITTORIO<br />
+U201200337 – PORTOCARRERO HEREDIA, RENZO ERNESTO<br />
+U200921443 – JAVIER GUTIERREZ, SERGIO<br />
+U201216398 – HUERTAS NAVARRO, RENZO<br />
+U201215768 – PRINCIPE TARAZONA, OSCAR PABLO<br />             
+            </p>
+        </div>
+    </section>
+}
+<h3>Casos de Uso:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Caso de Uso: Registrar Cama</h5>
+        @Html.ActionLink("Iniciar registro de camas", "Index", "Cama")
+    </li>
+
+    <li class="two">
+        <h5>Caso de Uso: Mantener Habitación</h5>
+        @Html.ActionLink("Iniciar registro de habitaciones", "Index", "OrdenInternamiento")
+    </li>
+</ol>

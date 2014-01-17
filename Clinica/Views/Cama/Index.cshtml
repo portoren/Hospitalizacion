@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Registro de Camas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registro de camas</h2>
+<table>
+    <tr>
+        <td><img src="~/Images/admin_camas.jpg" /></td>
+        <td>
+            <ul>
+                <li>@Html.ActionLink("Nueva cama", "Nuevo", "Cama")</li>
+                <li>@Html.ActionLink("Actualizar cama", "Buscar", "Cama", new {tipo = 0}, null)</li>
+                <li>@Html.ActionLink("Eliminar cama", "Buscar", "Cama", new {tipo = 1}, null)</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<p>@ViewBag.Mensaje</p>

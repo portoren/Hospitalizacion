@@ -1,0 +1,11 @@
+D:\ADSLost\DataAccess\obj\Release\DataAccess.csprojResolveAssemblyReference.cache
+D:\ADSLost\DataAccess\bin\Release\DataAccess.dll
+D:\ADSLost\DataAccess\bin\Release\DataAccess.pdb
+D:\ADSLost\DataAccess\bin\Release\BusinessEntities.dll
+D:\ADSLost\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\ADSLost\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\ADSLost\DataAccess\bin\Release\Microsoft.Practices.Unity.dll
+D:\ADSLost\DataAccess\bin\Release\Microsoft.Practices.ServiceLocation.dll
+D:\ADSLost\DataAccess\bin\Release\BusinessEntities.pdb
+D:\ADSLost\DataAccess\obj\Release\DataAccess.dll
+D:\ADSLost\DataAccess\obj\Release\DataAccess.pdb
