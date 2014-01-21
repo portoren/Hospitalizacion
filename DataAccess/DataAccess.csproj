@@ -30,7 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DAOperacion.cs" />
+    <Compile Include="DABitacora.cs" />
     <Compile Include="DAHabitacion.cs" />
+    <Compile Include="DAProcedimiento.cs" />
     <Compile Include="DAOrdenInternamiento.cs" />
     <Compile Include="DAAccesorioCama.cs" />
     <Compile Include="DABase.cs" />

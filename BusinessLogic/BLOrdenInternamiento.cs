@@ -82,6 +82,18 @@ namespace BusinessLogic
             }
         }
 
+        public int ValidarEstado(int intId, string strEstado)
+        {
+            try
+            {
+                return new DAOrdenInternamiento().ValidarEstado(intId, strEstado);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 
 }

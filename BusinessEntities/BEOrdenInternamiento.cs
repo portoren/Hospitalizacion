@@ -14,6 +14,8 @@ namespace BusinessEntities
         [Display(Name = "Orden Internamiento")]
         public string Numero { get; set; }
 
+        public string NumeroOrden { get; set; }
+
         public int IdDoctor { get; set; }
         
         public int IdPaciente { get; set; }        
@@ -26,6 +28,8 @@ namespace BusinessEntities
         public string Estado { get; set; }
 
         public List<BEOrdenInternamientoRecurso> Recursos { get; set; }
+
+        public List<BEOrdenInternamientoBitacora> Bitacora { get; set; }
 
     }
 
@@ -40,6 +44,7 @@ namespace BusinessEntities
         public BEOrdenInternamiento(IDataReader reader, int intTipo)
         {
             this.Recursos = new List<BEOrdenInternamientoRecurso>();
+            this.Bitacora = new List<BEOrdenInternamientoBitacora>();
 
             switch (intTipo)
             {
@@ -83,6 +88,15 @@ namespace BusinessEntities
                     TipoHabitacion = Convert.ToString(reader["TipoHabitacion"]);
                     IdHabitacion = Convert.ToInt32(reader["IdHabitacion"]);
                     CamaNombre = Convert.ToString(reader["Cama"]);
+
+                    break;
+                case 4:
+                    IdOrdenInternamiento = Convert.ToInt32(reader["IdOrdenInternamiento"]);
+                    Numero = Convert.ToString(reader["Numero"]);
+                    PacienteNombre = Convert.ToString(reader["Paciente"]);
+                    HabitacionNombre = Convert.ToString(reader["Habitacion"]);
+                    DoctorNombre = Convert.ToString(reader["Doctor"]);
+                    IdHabitacion = Convert.ToInt32(reader["IdHabitacion"]);
 
                     break;
                 default:

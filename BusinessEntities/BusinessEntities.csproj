@@ -31,8 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BEAccesorioCama.cs" />
+    <Compile Include="BEProcedimientoPregunta.cs" />
     <Compile Include="BECama.cs" />
+    <Compile Include="BEProcedimiento.cs" />
     <Compile Include="BEOrdenInternamiento.cs" />
+    <Compile Include="BEOrdenInternamientoBitacora.cs" />
     <Compile Include="BEParametro.cs" />
     <Compile Include="BEHabitacion.cs" />
     <Compile Include="BEOrdenInternamientoRecurso.cs" />

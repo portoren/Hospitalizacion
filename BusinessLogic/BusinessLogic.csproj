@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BLProcedimiento.cs" />
+    <Compile Include="BLOperacion.cs" />
+    <Compile Include="BLBitacora.cs" />
     <Compile Include="BLCama.cs" />
     <Compile Include="BLParametro.cs" />
     <Compile Include="BLAccesorioCama.cs" />

@@ -3,3 +3,8 @@ D:\trabajos\ADSLost\BusinessEntities\bin\Debug\BusinessEntities.dll
 D:\trabajos\ADSLost\BusinessEntities\bin\Debug\BusinessEntities.pdb
 D:\trabajos\ADSLost\BusinessEntities\obj\Debug\BusinessEntities.dll
 D:\trabajos\ADSLost\BusinessEntities\obj\Debug\BusinessEntities.pdb
+D:\GitHub\Hospitalizacion\BusinessEntities\bin\Debug\BusinessEntities.dll
+D:\GitHub\Hospitalizacion\BusinessEntities\bin\Debug\BusinessEntities.pdb
+D:\GitHub\Hospitalizacion\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+D:\GitHub\Hospitalizacion\BusinessEntities\obj\Debug\BusinessEntities.dll
+D:\GitHub\Hospitalizacion\BusinessEntities\obj\Debug\BusinessEntities.pdb

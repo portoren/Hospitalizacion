@@ -21,3 +21,14 @@ D:\ADSLost\DataAccess\bin\Debug\BusinessEntities.pdb
 D:\ADSLost\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 D:\ADSLost\DataAccess\obj\Debug\DataAccess.dll
 D:\ADSLost\DataAccess\obj\Debug\DataAccess.pdb
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\DataAccess.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\DataAccess.pdb
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\BusinessEntities.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.Unity.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\BusinessEntities.pdb
+D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.dll
+D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.pdb

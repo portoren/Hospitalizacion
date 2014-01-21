@@ -1,0 +1,149 @@
+﻿@model BusinessEntities.BEOrdenInternamiento
+
+@{
+    ViewBag.Title = "Bitacora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=Numero]").attr('readonly', 'readonly');
+        $("input[name=PacienteNombre]").attr('readonly', 'readonly');
+        $("input[name=HabitacionNombre]").attr('readonly', 'readonly');
+        $("input[name=DoctorNombre]").attr('readonly', 'readonly');
+
+        $('#EstadoPaciente').val('');
+        $("input[name=Fecha]").val('');
+        $("input[name=Descripcion]").val('');
+    });
+</script>
+
+<h2>Bitacora</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.IdOrdenInternamiento)
+    
+    <table border="0" cellpadding="0" cellspacing="0" style="border: 2px solid black;">
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PacienteNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PacienteNombre)
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Numero)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Numero)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.HabitacionNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.HabitacionNombre)
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DoctorNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DoctorNombre)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table border="0" cellpadding="0" cellspacing="0" style="border: 2px solid black;">
+        <tr>
+            <td>
+                <div class="editor-label">
+                    Estado Paciente:
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("EstadoPaciente", (SelectList)ViewBag.ListaEstadoPaciente, "-- Seleccione --", new { Id = "EstadoPaciente" })
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    Fecha y Hora:
+                </div>
+                <div class="editor-field">
+                    <input type="datetime-local" name="Fecha" style="width: 220px;" />
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    Descripción:
+                </div>
+                <div class="editor-field">
+                    @Html.TextArea("Descripcion", "", new { cols = "55", rows = "2" })
+                </div>
+            </td>
+            <td>
+                @*<button type="submit" name="operacion" data-val="false" value="agregar-detalle">Agregar Bitacora</button>*@
+                <input type="submit" value="Actualizar" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <th>Nro.</th>
+                <th>Estado Paciente</th>
+                <th>Fecha y Hora</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Bitacora != null && Model.Bitacora.Count > 0)
+            {
+                var i = 0;
+
+                foreach (var item in Model.Bitacora)
+                {
+            <tr>
+                <td>
+                    @(i + 1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoPacienteNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <button type="submit" name="operacion" value='eliminar-detalle-@item.IdOrdenInternamientoBitacora'>Eliminar</button>
+                </td>
+            </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+}
+
+<br />
+<br />
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

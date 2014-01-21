@@ -35,10 +35,14 @@ namespace BusinessEntities
         public static readonly string DOMINIO_ModoOperacion = "003";
         public static readonly string DOMINIO_TipoColchon = "004";
         public static readonly string DOMINIO_EstadoCama = "005";
-
         public static readonly string DOMINIO_TipoHabitacion = "006";
         public static readonly string DOMINIO_EstadoOrdenInternamiento = "007";
         public static readonly string DOMINIO_Recurso = "008";
+        public static readonly string DOMINIO_EstadoPaciente = "009";
+        public static readonly string DOMINIO_Procedimiento = "010";
+        public static readonly string DOMINIO_Entrada = "011";
+        public static readonly string DOMINIO_PausaQuirurgica = "012";
+        public static readonly string DOMINIO_Salida = "013";
 
     }
 

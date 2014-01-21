@@ -18,7 +18,18 @@ namespace DataAccess
             {
                 List<BEOrdenInternamiento> lista = new List<BEOrdenInternamiento>();
 
-                using (DbCommand dbCmd = this.db.GetSqlStringCommand("select oi.IdOrdenInternamiento, oi.Numero, d.nombre + ' ' + d.apellido_paterno as Doctor, p.nombre + ' ' + p.apellido_paterno as Paciente, h.Numero as Habitacion from OrdenInternamiento oi inner join Doctor d on d.IdDoctor = oi.IdDoctor inner join Paciente p on p.dni = oi.IdPaciente left join Habitacion h on h.IdHabitacion = oi.IdHabitacion where oi.Estado in ('001','002') and (p.nombre + ' ' + p.apellido_paterno) like '%' + @v_paciente + '%'"))
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand(@"
+select 
+oi.IdOrdenInternamiento, 
+oi.Numero, 
+d.nombre + ' ' + d.apellido_paterno as Doctor, 
+p.nombre + ' ' + p.apellido_paterno as Paciente, 
+h.Numero as Habitacion 
+from OrdenInternamiento oi 
+inner join Doctor d on d.IdDoctor = oi.IdDoctor 
+inner join Paciente p on p.dni = oi.IdPaciente 
+left join Habitacion h on h.IdHabitacion = oi.IdHabitacion 
+where oi.Estado in ('001','002') and (p.nombre + ' ' + p.apellido_paterno) like '%' + @v_paciente + '%'"))
                 {
                     this.db.AddInParameter(dbCmd, "@v_paciente", DbType.String, strPaciente);
 
@@ -43,7 +54,15 @@ namespace DataAccess
             {
                 BEOrdenInternamiento objBE = null;
 
-                using (DbCommand dbCmd = this.db.GetSqlStringCommand("select oi.IdOrdenInternamiento, oi.IdCama, oi.Numero, p.nombre + ' ' + p.apellido_paterno as Paciente from OrdenInternamiento oi inner join Paciente p on p.dni = oi.IdPaciente where IdOrdenInternamiento = @n_idordeninternamiento"))
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand(@"
+select 
+oi.IdOrdenInternamiento, 
+oi.IdCama, 
+oi.Numero, 
+p.nombre + ' ' + p.apellido_paterno as Paciente 
+from OrdenInternamiento oi 
+inner join Paciente p on p.dni = oi.IdPaciente 
+where IdOrdenInternamiento = @n_idordeninternamiento"))
                 {
                     this.db.AddInParameter(dbCmd, "@n_idordeninternamiento", DbType.Int32, intIdOrdenInternamiento);
 
@@ -73,7 +92,14 @@ namespace DataAccess
                 BEOrdenInternamiento objBE = null;
 
                 using (DbCommand dbCmd = this.db.GetSqlStringCommand(@"
-select oi.IdOrdenInternamiento, oi.Numero, oi.IdHabitacion, p.nombre + ' ' + p.apellido_paterno as Paciente, h.Numero as Habitacion, 'Cama ' + cast(c.IdCama as varchar(100)) + ' - Modelo: ' + c.Modelo as Cama, (select top 1 Nombre from Parametro where IdDominio = '006' and IdParametro = h.Tipo) as TipoHabitacion
+select 
+oi.IdOrdenInternamiento, 
+oi.Numero, 
+oi.IdHabitacion, 
+p.nombre + ' ' + p.apellido_paterno as Paciente, 
+h.Numero as Habitacion, 
+'Cama ' + cast(c.IdCama as varchar(100)) + ' - Modelo: ' + c.Modelo as Cama, 
+(select top 1 Nombre from Parametro where IdDominio = '006' and IdParametro = h.Tipo) as TipoHabitacion
 from OrdenInternamiento oi 
 inner join Paciente p on p.dni = oi.IdPaciente 
 inner join Habitacion h on h.IdHabitacion = oi.IdHabitacion
@@ -446,6 +472,24 @@ oir.Cantidad, oir.Observacion from OrdenInternamiento_Recurso oir where oir.IdOr
                 }
 
                 return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int ValidarEstado(int intId, string strEstado)
+        {
+            try
+            {
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand("select count(1) from OrdenInternamiento where IdOrdenInternamiento = @n_Id and Estado = @v_Estado"))
+                {
+                    this.db.AddInParameter(dbCmd, "@n_Id", DbType.Int32, intId);
+                    this.db.AddInParameter(dbCmd, "@v_Estado", DbType.String, strEstado);
+
+                    return (int)this.db.ExecuteScalar(dbCmd);
+                }
             }
             catch (Exception)
             {

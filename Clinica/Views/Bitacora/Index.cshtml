@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BusinessEntities.BEOrdenInternamiento>
+
+@{
+    ViewBag.Title = "Bitacora de Atención";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+
+<h2>Administración de Bitacora</h2>
+@using (Html.BeginForm())
+{
+    <div class="editor-label">        
+        Apellido del Paciente : <input type="text" id="a" name="paciente" value="" />
+    </div>
+    <div class="editor-field">
+        Nombre del Paciente : <input type="text" id="b" name="pacientenombre" value="" />
+    </div>
+    
+    <input type="submit" value="Buscar" /><button value="Limpiar" onclick="$('input[name=paciente]').val(''); $('input[name=pacientenombre]').val('');">Limpiar</button>
+}
+
+
+<p>@ViewBag.Mensaje</p>
+
+<table border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PacienteNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.HabitacionNombre)
+        </th>*@
+         <th>
+            
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PacienteNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.HabitacionNombre)
+        </td>*@
+        <td>
+            @Html.ActionLink("Actualizar", "Actualizar", new { id = item.IdOrdenInternamiento })
+        </td>
+        <th>
+            @Html.ActionLink("Ver", "Ver", new { id = item.IdOrdenInternamiento })
+        </th>
+    </tr>
+}
+
+</table>

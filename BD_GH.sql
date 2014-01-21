@@ -1,10 +1,11 @@
 USE [master]
 GO
 
-CREATE DATABASE [clinica] ON  PRIMARY 
-( NAME = N'clinica_data', FILENAME = N'd:\database\clinica.mdf', SIZE = 167872KB , MAXSIZE = UNLIMITED, FILEGROWTH = 16384KB )
-    LOG ON 
-( NAME = N'clinica_log', FILENAME = N'd:\database\clinica.ldf', SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 16384KB )
+CREATE DATABASE [clinica] 
+--ON  PRIMARY 
+--( NAME = N'clinica_data', FILENAME = N'd:\database\clinica.mdf', SIZE = 167872KB , MAXSIZE = UNLIMITED, FILEGROWTH = 16384KB )
+--    LOG ON 
+--( NAME = N'clinica_log', FILENAME = N'd:\database\clinica.ldf', SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 16384KB )
 GO
 
 USE [clinica]
@@ -139,7 +140,7 @@ GO
 CREATE TABLE Parametro (
 	IdParametro VARCHAR ( 3 ) NOT NULL,
 	IdDominio VARCHAR ( 3 ) NOT NULL,
-	Nombre VARCHAR ( 50 ) NOT NULL,
+	Nombre VARCHAR ( 200 ) NOT NULL,
 	CONSTRAINT PK_Parametro PRIMARY KEY NONCLUSTERED (IdDominio, IdParametro),
 	CONSTRAINT FK_Dominio_Parametro FOREIGN KEY (IdDominio) REFERENCES Dominio (IdDominio) 
 )
@@ -262,8 +263,33 @@ GO
 --ALTER TABLE T_Recurso ADD CONSTRAINT FK_T_Recurso14 FOREIGN KEY (T_Habitacion_ID) REFERENCES T_Habitacion (T_Habitacion_ID) 
 --GO
 
+CREATE TABLE [dbo].[OrdenInternamiento_Bitacora](
+	[IdOrdenInternamientoBitacora] [int] IDENTITY(1,1) NOT NULL,
+	[IdOrdenInternamiento] [int] NOT NULL,
+	[Fecha] [datetime] NOT NULL,
+	[EstadoPaciente] [varchar](3) NOT NULL,
+	[Descripcion] [varchar](255) NOT NULL,
+	[Estado] [varchar](3) NOT NULL,
+ CONSTRAINT [PK_OrdenInternamientoBitacora] PRIMARY KEY NONCLUSTERED 
+(
+	[IdOrdenInternamientoBitacora] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[OrdenInternamiento_Bitacora]  WITH CHECK ADD  CONSTRAINT [FK_OrdenInternamiento_OrdenInternamientoBitacora] FOREIGN KEY([IdOrdenInternamiento])
+REFERENCES [dbo].[OrdenInternamiento] ([IdOrdenInternamiento])
+GO
+
+ALTER TABLE [dbo].[OrdenInternamiento_Bitacora] CHECK CONSTRAINT [FK_OrdenInternamiento_OrdenInternamientoBitacora]
+GO
+
 INSERT INTO Dominio VALUES ('001','Marca'),('002','Tipo de Cama'),('003','Modo de Operación'),('004','Tipo Colchón'),('005','Estado de la Cama'),('006','Tipo de la Habitación'),
-('007','Estado de Orden de Internamiento'),('008','Recurso')
+('007','Estado de Orden de Internamiento'),('008','Recurso'),('009','Estado del Paciente'),('010','Procedimiento'),('011','Entrada'),('012','Pausa Quirurgica'),('013','Salida')
 go 
 INSERT INTO Parametro VALUES 
 ('001','001','Marca 001'),('002','001','Marca 002'),('003','001','Marca 003'),('004','001','Marca 004'),('005','001','Marca 005'),('006','001','Marca 006'),
@@ -273,7 +299,26 @@ INSERT INTO Parametro VALUES
 ('001','005','Abierta'),('002','005','Cerrada'),('003','005','En uso'),('004','005','Anulada'),
 ('001','006','Simple'),('002','006','Doble'),('003','006','Triple'),
 ('001','007','No Asignado Habitación'),('002','007','Habitación Asignado'),('003','007','Dado de Alta'),
-('002','008','Sillon'),('003','008','Televisor'),('004','008','Mesa'),('005','008','Frigobar')--('001','008','Cama Ortopedica'),
+('002','008','Sillon'),('003','008','Televisor'),('004','008','Mesa'),('005','008','Frigobar'),--('001','008','Cama Ortopedica'),
+('001','009','Estable'),('002','009','En Recuperacion'),('001','010','Procedimiento A'),('002','010','Procedimiento B'),
+('001','011','El paciente ha confirmado su identidad'),
+('002','011','El paciente ha confirmado su consentimiento'),
+('003','011','El paciente ha confirmado el procedimiento'),
+('004','011','Se ha completado el control de seguridad de la anastesia'),
+('005','011','Pulsioximetro colocado y en funcionamiento'),
+('006','011','Tiene el paciente alergias conocidas'),
+('007','011','Via aerea dificil/riesgo de aspiracion'),
+('008','011','Riesgo de Hemorragia > 500ML (7ml/kg niños) y se ha previsto la disponibilidad de acceso intravenoso y liquidos adecuados'),
+('001','012','El paciente ha confirmado su identidad'),
+('002','012','Confirmar si todos los miembros del equipo se hayan presentado por su nombre y funcion'),
+('003','012','El cirujano revisa los pasos...'),
+('004','012','El equipo de anastesia revisa..'),
+('005','012','El equipo de enfermeria revisa...'),
+('006','012','El equipo de enfermeria revisa si existen...'),
+('007','012','se ha administrado...'),
+('001','013','La enfermera confirma...'),
+('002','013','La enfermera confirma verbal...'),
+('003','013','El cirujano y anastesista...')
 go
 INSERT INTO AccesorioCama VALUES ('Almohada'),('Colcha'),('Reja de Seguridad'),('Sábanas')
 go
@@ -307,4 +352,66 @@ insert into Cama (Marca, Modelo, TipoCama, ModoOperacion, TipoColchon, Estado) v
 set @n_id = (select @@IDENTITY)
 end
 go
+
+/****** Object:  StoredProcedure [dbo].[pa_bitacora_set_insert]    Script Date: 19/01/2014 01:23:02 p.m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pa_bitacora_set_insert]
+@n_id int output,
+@n_ordeninternamiento int,
+@f_fecha datetime,
+@v_estadopaciente varchar(3),
+@v_descripcion varchar(255),
+@v_estado varchar(3)
+as
+begin
+insert into [dbo].[OrdenInternamiento_Bitacora] 
+([IdOrdenInternamiento], [Fecha], [EstadoPaciente], [Descripcion], [Estado]) 
+values (@n_ordeninternamiento, @f_fecha, @v_estadopaciente, @v_descripcion, @v_estado)
+set @n_id = (select @@IDENTITY)
+end
+
+GO
+
+CREATE TABLE Procedimiento (
+	IdProcedimiento INT IDENTITY NOT NULL,
+	Tipo VARCHAR ( 3 ) NOT NULL,
+	IdOrdenInternamiento [int] NOT NULL,
+	Estado VARCHAR ( 3 ) NOT NULL,
+
+	CONSTRAINT PK_Procedimiento PRIMARY KEY NONCLUSTERED (IdProcedimiento),
+	CONSTRAINT FK_OrdenInternamiento_Procedimiento FOREIGN KEY (IdOrdenInternamiento) REFERENCES OrdenInternamiento (IdOrdenInternamiento),
+)
+GO
+
+CREATE TABLE Procedimiento_Pregunta (
+	IdProcedimientoPregunta INT IDENTITY NOT NULL,
+	IdProcedimiento INT NOT NULL,
+	Tipo VARCHAR ( 3 ) NOT NULL,
+	Pregunta VARCHAR ( 3 ) NOT NULL,
+	Respuesta VARCHAR ( 2 ) NOT NULL,
+	Descripcion VARCHAR ( 500 ) NULL,
+	Estado VARCHAR ( 3 ) NOT NULL,
+	CONSTRAINT PK_ProcedimientoPregunta PRIMARY KEY NONCLUSTERED (IdProcedimientoPregunta),
+	CONSTRAINT FK_Procedimiento_ProcedimientoPregunta FOREIGN KEY (IdProcedimiento) REFERENCES Procedimiento (IdProcedimiento)
+ )
+GO
+
+create procedure pa_procedimiento_set_insert
+@n_id int output,
+@n_ordeninternamiento int,
+@v_tipo varchar(3),
+@v_estado varchar(3)
+as
+begin
+insert into Procedimiento (IdOrdenInternamiento, Tipo, Estado) values (@n_ordeninternamiento, @v_tipo, @v_estado)
+set @n_id = (select @@IDENTITY)
+end
+go
+
+
 
