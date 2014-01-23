@@ -52,6 +52,46 @@ namespace Clinica.Controllers
             return View(lista);
         }
 
+        public ActionResult Asignacion()
+        {
+            List<BEOrdenInternamiento> lista = new List<BEOrdenInternamiento>();
+
+            try
+            {
+                lista = new BLBitacora().Buscar("", "");
+
+                ViewBag.Mensaje = TempData["Mensaje"];
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = ex.Message;
+            }
+
+            return View(lista);
+        }
+
+
+        [HttpPost]
+        public ActionResult Asignacion(FormCollection form)
+        {
+            List<BEOrdenInternamiento> lista = new List<BEOrdenInternamiento>();
+
+            try
+            {
+                string strApellido = form["paciente"];
+                string strNombre = form["pacientenombre"];
+                lista = new BLBitacora().Buscar(strApellido, strNombre);
+
+                ViewBag.Mensaje = "";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = ex.Message;
+            }
+
+            return View(lista);
+        }
+
         public ActionResult Actualizar(int id)
         {
             BEOrdenInternamiento bitacora = new BEOrdenInternamiento();

@@ -443,3 +443,4 @@ D:\GitHub\Hospitalizacion\Clinica\bin\zh-Hans\System.Spatial.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\zh-Hant\System.Spatial.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\obj\Release\Hospitalizacion.dll
 D:\GitHub\Hospitalizacion\Clinica\obj\Release\Hospitalizacion.pdb
+D:\GitHub\Hospitalizacion\Clinica\obj\Release\Clinica.csprojResolveAssemblyReference.cache

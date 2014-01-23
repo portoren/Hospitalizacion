@@ -11,9 +11,8 @@ namespace Clinica.Controllers
     public class OperacionController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Index(int intID)
         {
-            int intID = 1;
             BEOrdenInternamiento objOI = new BEOrdenInternamiento();
 
             try

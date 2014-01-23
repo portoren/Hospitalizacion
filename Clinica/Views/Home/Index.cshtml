@@ -11,9 +11,9 @@
            <p>
                 <strong>Integrantes:</strong><br />
                 U201200336 – CARPIO CARPIO, OMAR VITTORIO<br />
-U201200337 – PORTOCARRERO HEREDIA, RENZO ERNESTO<br />
-U201216398 – HUERTAS NAVARRO, RENZO<br />
-U201215768 – PRINCIPE TARAZONA, OSCAR PABLO<br />             
+                U201200337 – PORTOCARRERO HEREDIA, RENZO ERNESTO<br />
+                U201216398 – HUERTAS NAVARRO, RENZO<br />
+                U201215768 – PRINCIPE TARAZONA, OSCAR PABLO<br />             
             </p>
         </div>
     </section>
@@ -22,21 +22,26 @@ U201215768 – PRINCIPE TARAZONA, OSCAR PABLO<br />
 <ol class="round">
     <li class="one">
         <h5>Caso de Uso: Registrar Cama</h5>
-        @Html.ActionLink("Iniciar registro de camas", "Index", "Cama")
+        @Html.ActionLink("Iniciar", "Index", "Cama")
     </li>
 
     <li class="two">
         <h5>Caso de Uso: Mantener Habitación</h5>
-        @Html.ActionLink("Iniciar registro de habitaciones", "Index", "OrdenInternamiento")
+        @Html.ActionLink("Iniciar", "Index", "OrdenInternamiento")
     </li>
 
     <li class="three">
         <h5>Caso de Uso: Mantener Bitacora de Internamiento</h5>
-        @Html.ActionLink("Iniciar Bitácora de Internamiento", "Index", "Bitacora")
+        @Html.ActionLink("Iniciar", "Asignacion", "Bitacora")
     </li>
 
     <li class="four">
-        <h5>Caso de Uso: Registrar Lista Verificación de Seguridad</h5>
-        @Html.ActionLink("Iniciar Lista de Verificación de Seguridad", "Index", "Operacion")
+        <h5>Caso de Uso: Consultar Bitacora de Internamiento</h5>
+        @Html.ActionLink("Iniciar", "Index", "Bitacora")
+    </li>
+
+    <li class="five">
+        <h5>Caso de Uso: Registrar Checklist de Requisitos</h5>
+        @Html.ActionLink("Iniciar", "Index", "Operacion", new { intID = 1 }, null)
     </li>
 </ol>
