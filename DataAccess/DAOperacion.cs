@@ -13,7 +13,47 @@ namespace DataAccess
 
     public class DAOperacion : DABase
     {
-        
+
+        public List<BEOrdenInternamiento> Buscar(string strApellido, string strNombre)
+        {
+            try
+            {
+                List<BEOrdenInternamiento> lista = new List<BEOrdenInternamiento>();
+
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand(@"
+select
+    oi.IdOrdenInternamiento, 
+    oi.Numero, 
+    d.nombre + ' ' + d.apellido_paterno as Doctor, 
+    p.nombre + ' ' + p.apellido_paterno as Paciente, 
+    h.Numero as Habitacion,
+	(select top 1 Estado from Procedimiento where IdOrdenInternamiento = oi.IdOrdenInternamiento and Estado in ('011','012')) as Estado
+from OrdenInternamiento oi
+inner join Doctor d on d.IdDoctor = oi.IdDoctor
+inner join Paciente p on p.dni = oi.IdPaciente
+inner join Habitacion h  on h.IdHabitacion = oi.IdHabitacion
+where oi.Estado in ('002') and 
+p.apellido_paterno like '%' + @v_apellido + '%' and
+p.nombre like '%' + @v_nombre + '%'"))
+                {
+                    this.db.AddInParameter(dbCmd, "@v_apellido", DbType.String, strApellido);
+                    this.db.AddInParameter(dbCmd, "@v_nombre", DbType.String, strNombre);
+
+                    using (IDataReader reader = this.db.ExecuteReader(dbCmd))
+                    {
+                        while (reader.Read())
+                            lista.Add(new BEOrdenInternamiento(reader, 0));
+                    }
+
+                    return lista;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public BEOrdenInternamiento ObtenerOI(int intIdOrdenInternamiento)
         {
             try

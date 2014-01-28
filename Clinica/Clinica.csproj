@@ -322,6 +322,9 @@
     <Content Include="Views\Bitacora\Ver.cshtml" />
     <Content Include="Views\Operacion\Index.cshtml" />
     <Content Include="Views\Bitacora\Asignacion.cshtml" />
+    <Content Include="Views\Operacion\Generar.cshtml" />
+    <Content Include="Views\Operacion\Pausa.cshtml" />
+    <Content Include="Views\Operacion\Salida.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

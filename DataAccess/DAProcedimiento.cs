@@ -55,6 +55,72 @@ namespace DataAccess
             }
         }
 
+        public bool Actualizar(BEProcedimiento objBE)
+        {
+            bool isOK = false;
+
+            try
+            {
+                DbConnection dbCn = this.db.CreateConnection();
+                dbCn.Open();
+
+                DbTransaction dbTr = dbCn.BeginTransaction();
+
+                try
+                {
+                    if (objBE.Estado.Equals("012"))
+                        objBE.IdProcedimiento = this.ObtenerID(objBE.IdOrdenInternamiento, "011");
+                    else
+                        objBE.IdProcedimiento = this.ObtenerID(objBE.IdOrdenInternamiento, "012");
+
+                    isOK = this.Actualizar(dbTr, objBE);
+
+                    if (isOK)
+                        isOK = this.InsertarPreguntas(dbTr, objBE.Preguntas, objBE.IdProcedimiento);
+
+                    if (isOK)
+                        dbTr.Commit();
+                    else
+                        dbTr.Rollback();
+                }
+                catch (Exception)
+                {
+                    dbTr.Rollback();
+
+                    throw;
+                }
+                finally
+                {
+                    if (dbCn.State == ConnectionState.Open)
+                        dbCn.Close();
+                }
+
+                return isOK;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private int ObtenerID(int intIdOI, string strEstado)
+        {
+            try
+            {
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand("select top 1 IdProcedimiento from Procedimiento where IdOrdenInternamiento = @n_IdOI and Estado = @v_Estado order by IdProcedimiento desc"))
+                {
+                    this.db.AddInParameter(dbCmd, "@n_IdOI", DbType.Int32, intIdOI);
+                    this.db.AddInParameter(dbCmd, "@v_Estado", DbType.String, strEstado);
+
+                    return (int)this.db.ExecuteScalar(dbCmd);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private bool Insertar(DbTransaction dbTr, BEProcedimiento objBE)
         {
             try
@@ -72,6 +138,27 @@ namespace DataAccess
 
                         return true;
                     }
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private bool Actualizar(DbTransaction dbTr, BEProcedimiento objBE)
+        {
+            try
+            {
+                using (DbCommand dbCmd = this.db.GetSqlStringCommand("update Procedimiento set Estado = @v_estado where IdProcedimiento = @n_id"))
+                {
+                    this.db.AddInParameter(dbCmd, "@n_id", DbType.String, objBE.IdProcedimiento);
+                    this.db.AddInParameter(dbCmd, "@v_estado", DbType.String, objBE.Estado);
+
+                    if (this.db.ExecuteNonQuery(dbCmd, dbTr) > 0)
+                        return true;
                 }
 
                 return false;

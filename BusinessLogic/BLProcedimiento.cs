@@ -22,6 +22,18 @@ namespace BusinessLogic
             }
         }
 
+        public bool Actualizar(BEProcedimiento objBE)
+        {
+            try
+            {
+                return new DAProcedimiento().Actualizar(objBE);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 
 }

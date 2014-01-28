@@ -12,6 +12,18 @@ namespace BusinessLogic
     public class BLOperacion
    {
 
+       public List<BEOrdenInternamiento> Buscar(string strApellido, string strNombre)
+        {
+            try
+            {
+                return new DAOperacion().Buscar(strApellido, strNombre);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
        public BEOrdenInternamiento ObtenerOI(int intIdOrdenInternamiento)
        {
            try

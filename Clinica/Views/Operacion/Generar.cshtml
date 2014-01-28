@@ -1,0 +1,173 @@
+﻿@model BusinessEntities.BEOrdenInternamiento
+
+@{
+    ViewBag.Title = "Bitacora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name=Numero]").attr('readonly', 'readonly');
+        $("input[name=PacienteNombre]").attr('readonly', 'readonly');
+        $("input[name=HabitacionNombre]").attr('readonly', 'readonly');
+        $("input[name=DoctorNombre]").attr('readonly', 'readonly');
+
+        $("input[type=radio]").click(function () {
+            var radio = $(this);
+            var nameText = $(this).attr('name').replace('o', 't');
+            var text = $("input[name=" + nameText + "]");
+
+            if (radio.val() == "NO") {
+                $(text).css({ "visibility": "visible" });
+                $(text).css({ "display": "block" });
+            }
+            else {
+                $(text).css({ "visibility": "hidden" });
+                $(text).css({ "display": "none" });
+            }
+            $(text).val('');
+        });
+    });
+
+    function siguiente() {
+        var procedimiento = $("#Procedimiento option:selected").val();
+
+        if (procedimiento == "") {
+            alert("Debe seleccionar un procedimiento");
+            return false;
+        }
+
+        var allRadios = $('input[type=radio]');
+        var nameRadio;
+        var valueRadio;
+        var valueText;
+        var ok = true;
+
+        $.each(allRadios, function (i, val) {
+            nameRadio = $(this).attr('name');
+
+            if (nameRadio.substr(0, 3) == "011") {
+                valueRadio = $("input[name=" + nameRadio + "]:checked").val();
+
+                if (valueRadio == "NO") {
+                    valueText = $("input[name=" + nameRadio.replace('o', 't') + "]").val();
+
+                    if (valueText == "") {
+                        alert('Debe ingresar el valor para la respuesta negativa');
+                        ok = false;
+                        return false;
+                    }
+                }
+                else if (valueRadio == "SI") {
+                }
+                else {
+                    alert('Debe seleccionar una respuesta');
+                    ok = false;
+                    return false;
+                }
+            }
+        });
+
+        if (ok == false)
+            return false;
+        else {
+            $("input[name='enviar']").click();
+        }
+    }
+</script>
+
+<h2>Lista de Verificacion de Requisitos</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.IdOrdenInternamiento)
+
+    <table border="0" cellpadding="0" cellspacing="0" style="border: 2px solid black;">
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PacienteNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PacienteNombre)
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Numero)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Numero)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.HabitacionNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.HabitacionNombre)
+                </div>
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DoctorNombre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DoctorNombre)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input type="hidden" id="next" value="000" />
+    <table id="procedimiento" border="0" cellpadding="0" cellspacing="0" style="border: 2px solid black;">
+        <tr>
+            <td>
+                <div class="editor-label">
+                    Procedimiento:
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Procedimiento", (SelectList)ViewBag.ListaProcedimiento, "-- Seleccione --", new { Id = "Procedimiento" })
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table id="entrada" border="0" cellpadding="0" cellspacing="0" style="border: 2px solid black;">
+        @*visibility: hidden; display: none;*@
+    <tr>
+        <th>SI / NO</th>
+        <th>Entrada</th>
+    </tr>
+
+    @foreach (var entrada in ViewBag.ListaEntrada)
+    {
+        <tr>
+            <td>
+                <input type="radio" id="011o@(entrada.Value)" name="011o@(entrada.Value)" value="SI" style="width: 20px;" />
+                <input type="radio" id="011o@(entrada.Value)" name="011o@(entrada.Value)" value="NO" style="width: 20px;" />
+            </td>
+            <td style="width: 500px;">
+                @entrada.Text
+                <br />
+                <input type="text" name="011t@(entrada.Value)" value="" style="visibility: hidden; display: none;" />
+            </td>
+        </tr>
+    }
+</table>
+    <br />
+    <button id="next" type="button" onclick="siguiente()">Siguiente</button>
+    <input id="submit" type="submit" value="Actualizar" name="enviar" style="visibility: hidden; display: none;" />
+}
+
+<br />
+<br />
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

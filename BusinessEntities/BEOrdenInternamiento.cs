@@ -49,13 +49,20 @@ namespace BusinessEntities
             switch (intTipo)
             {
                 case 0:
-                    //IdCama = Convert.ToInt32(reader["IdCama"]);
-                    //Marca = Convert.ToString(reader["Marca"]);
-                    //Modelo = Convert.ToString(reader["Modelo"]);
-                    //TipoCama = Convert.ToString(reader["TipoCama"]);
-                    //ModoOperacion = Convert.ToString(reader["ModoOperacion"]);
-                    //TipoColchon = Convert.ToString(reader["TipoColchon"]);
-                    //Estado = Convert.ToString(reader["Estado"]);
+                    IdOrdenInternamiento = Convert.ToInt32(reader["IdOrdenInternamiento"]);
+                    Numero = Convert.ToString(reader["Numero"]);
+                    DoctorNombre = Convert.ToString(reader["Doctor"]);
+                    PacienteNombre = Convert.ToString(reader["Paciente"]);
+                    if (reader["Habitacion"].Equals(DBNull.Value))
+                        Estado = "";
+                    else
+                        Estado = Convert.ToString(reader["Estado"]);
+
+                    if (reader["Habitacion"].Equals(DBNull.Value))
+                        HabitacionNombre = "";
+                    else
+                        HabitacionNombre = Convert.ToString(reader["Habitacion"]);
+
                     break;
                 case 1:
                     IdOrdenInternamiento = Convert.ToInt32(reader["IdOrdenInternamiento"]);
