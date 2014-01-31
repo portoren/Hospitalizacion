@@ -24,20 +24,21 @@
 
 <p>@ViewBag.Mensaje</p>
 
+@if (Model.Count<BusinessEntities.BEOrdenInternamiento>() > 0) {
+
 <table border="1">
     <tr>
-        <th>
+        <th style="width: 200px;">
             @Html.DisplayNameFor(model => model.PacienteNombre)
         </th>
-        <th>
+        <th style="width: 200px;">
             @Html.DisplayNameFor(model => model.DoctorNombre)
         </th>
-        <th>
+        <th style="width: 200px;">
             @Html.DisplayNameFor(model => model.Numero)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.HabitacionNombre)
-            </th>*@
+        <th style="width: 200px;">
+             Acción
         <th>
 
         </th>
@@ -73,3 +74,4 @@
     }
 
 </table>
+}

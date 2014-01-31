@@ -14,18 +14,6 @@ namespace Clinica.Controllers
         public ActionResult Index()
         {
             List<BEOrdenInternamiento> lista = new List<BEOrdenInternamiento>();
-
-            try
-            {
-                lista = new BLOperacion().Buscar("", "");
-
-                ViewBag.Mensaje = TempData["Mensaje"];
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Mensaje = ex.Message;
-            }
-
             return View(lista);
         }
 
