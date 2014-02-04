@@ -14,6 +14,5 @@ D:\trabajos\Hospitalizacion\BusinessEntities\obj\Release\BusinessEntities.dll
 D:\trabajos\Hospitalizacion\BusinessEntities\obj\Release\BusinessEntities.pdb
 D:\GitHub\Hospitalizacion\BusinessEntities\bin\Release\BusinessEntities.dll
 D:\GitHub\Hospitalizacion\BusinessEntities\bin\Release\BusinessEntities.pdb
-D:\GitHub\Hospitalizacion\BusinessEntities\obj\Release\BusinessEntities.csprojResolveAssemblyReference.cache
 D:\GitHub\Hospitalizacion\BusinessEntities\obj\Release\BusinessEntities.dll
 D:\GitHub\Hospitalizacion\BusinessEntities\obj\Release\BusinessEntities.pdb

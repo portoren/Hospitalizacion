@@ -369,9 +369,6 @@ D:\GitHub\Hospitalizacion\Clinica\bin\WebMatrix.WebData.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\DataAccess.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
-D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.ServiceLocation.dll
-D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.Unity.dll
-D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.Unity.Interception.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\BusinessEntities.pdb
 D:\GitHub\Hospitalizacion\Clinica\bin\BusinessLogic.pdb
 D:\GitHub\Hospitalizacion\Clinica\bin\EntityFramework.xml
@@ -399,6 +396,8 @@ D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Data.Edm.xml
 D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Data.OData.xml
 D:\GitHub\Hospitalizacion\Clinica\bin\System.Spatial.xml
 D:\GitHub\Hospitalizacion\Clinica\bin\DataAccess.pdb
+D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.EnterpriseLibrary.Data.xml
+D:\GitHub\Hospitalizacion\Clinica\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
 D:\GitHub\Hospitalizacion\Clinica\bin\es\EntityFramework.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\es\System.Net.Http.Formatting.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\es\System.Web.Helpers.resources.dll
@@ -441,6 +440,6 @@ D:\GitHub\Hospitalizacion\Clinica\bin\ko\System.Spatial.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\ru\System.Spatial.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\zh-Hans\System.Spatial.resources.dll
 D:\GitHub\Hospitalizacion\Clinica\bin\zh-Hant\System.Spatial.resources.dll
+D:\GitHub\Hospitalizacion\Clinica\obj\Release\Clinica.csprojResolveAssemblyReference.cache
 D:\GitHub\Hospitalizacion\Clinica\obj\Release\Hospitalizacion.dll
 D:\GitHub\Hospitalizacion\Clinica\obj\Release\Hospitalizacion.pdb
-D:\GitHub\Hospitalizacion\Clinica\obj\Release\Clinica.csprojResolveAssemblyReference.cache

@@ -37,9 +37,15 @@ D:\GitHub\Hospitalizacion\DataAccess\bin\Release\DataAccess.pdb
 D:\GitHub\Hospitalizacion\DataAccess\bin\Release\BusinessEntities.dll
 D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
 D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.dll
-D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.Unity.dll
-D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.ServiceLocation.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Validation.dll
 D:\GitHub\Hospitalizacion\DataAccess\bin\Release\BusinessEntities.pdb
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Data.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Release\Microsoft.Practices.EnterpriseLibrary.Validation.xml
 D:\GitHub\Hospitalizacion\DataAccess\obj\Release\DataAccess.csprojResolveAssemblyReference.cache
 D:\GitHub\Hospitalizacion\DataAccess\obj\Release\DataAccess.dll
 D:\GitHub\Hospitalizacion\DataAccess\obj\Release\DataAccess.pdb
