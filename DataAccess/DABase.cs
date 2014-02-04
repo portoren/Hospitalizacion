@@ -19,6 +19,7 @@ namespace DataAccess
 
         public DABase()
         {
+            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
             dbConn = DatabaseFactory.CreateDatabase(ConfigurationManager.AppSettings["conexionDB"]);
         }
 

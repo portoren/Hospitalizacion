@@ -32,11 +32,10 @@ D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\BusinessEntities.dll
 D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\DataAccess.dll
 D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
 D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
-D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.Unity.dll
-D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\BusinessEntities.pdb
 D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\DataAccess.pdb
 D:\GitHub\Hospitalizacion\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
 D:\GitHub\Hospitalizacion\BusinessLogic\obj\Debug\BusinessLogic.dll
 D:\GitHub\Hospitalizacion\BusinessLogic\obj\Debug\BusinessLogic.pdb
+D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+D:\GitHub\Hospitalizacion\BusinessLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml

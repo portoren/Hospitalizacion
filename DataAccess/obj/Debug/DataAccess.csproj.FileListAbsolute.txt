@@ -32,3 +32,11 @@ D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\BusinessEntities.pdb
 D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.dll
 D:\GitHub\Hospitalizacion\DataAccess\obj\Debug\DataAccess.pdb
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+D:\GitHub\Hospitalizacion\DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
