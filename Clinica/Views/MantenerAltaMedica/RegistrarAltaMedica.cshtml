@@ -1,0 +1,77 @@
+﻿@model BusinessEntities.BEAltaMedica
+
+@{
+    ViewBag.Title = "RegistrarAltaMedica";
+}
+
+<h2>RegistrarAltaMedica</h2>
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+<h2>Registrar Alta Medica</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.NumeroOrdenInternamiento)
+    <table>
+        <tr>
+            <td>
+                Nombre Paciente: 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.NombrePaciente)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nombre Doctor : 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.NombreDoctor)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Habitación : 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.idHabitacion)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Cama : 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.idCama.ToString())
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Descripción : 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.TextArea("Descripcion")
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input type="submit" value="Guardar" />
+    <button value="Limpiar" onclick="$('input[name=paciente]').val(''); $('input[name=pacientenombre]').val('');">Limpiar</button>
+}
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
+

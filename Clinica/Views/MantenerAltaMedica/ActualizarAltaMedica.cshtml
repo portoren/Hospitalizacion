@@ -1,0 +1,105 @@
+﻿@model BusinessEntities.BEAltaMedica
+
+@{
+    ViewBag.Title = "ActualizarAltaMedica";
+}
+
+<h2>ActualizarAltaMedica</h2>
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+</script>
+
+<h2>Búsqueda de Bitacora</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.IdOrdenInternamientoBitacora)
+    
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                Nombre: 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.NombrePaciente)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Apellido Paterno: 
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.Label(Model.ApellidoPaterno)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Apellido Materno: 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.Label(Model.ApellidoMaterno)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Orden Internamiento: 
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.LabelForModel(Model.NumeroOrdenInternamiento)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Habitación: 
+            </td>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelForModel(Model.idHabitacion)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fecha: 
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.LabelForModel(Model.fechaHora)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Indicaciones: 
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Descripcion, "Descripcion_")
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                @*<button type="submit" name="operacion" data-val="false" value="agregar-detalle">Agregar Bitacora</button>*@
+                <input type="submit" value="Actualizar" />
+            </td>
+        </tr>
+    </table>
+    <br />
+
+<p>@ViewBag.Mensaje</p>
+
+}

@@ -415,3 +415,210 @@ go
 
 
 
+---------- ACTUALIZACION DE OSCAR
+
+
+create procedure [dbo].[pa_ActualizarAltaMedica]
+@n_OrdenInternamientoBitacora int
+--,@v_Nombre varchar(255)
+--,@v_ApellidoPaterno varchar(255)
+--,@v_ApellidoMaterno varchar(255)
+--,@n_idHabitacion int
+,@v_Descripcion varchar(255)
+AS
+BEGIN
+
+DECLARE @dni varchar(8)--id del Paciente
+
+UPDATE OrdenInternamiento_Bitacora
+SET Descripcion = @v_Descripcion
+WHERE IdOrdenInternamientoBitacora = @n_OrdenInternamientoBitacora
+
+SET @dni = (SELECT IdPaciente 
+	FROM OrdenInternamiento WHERE IdOrdenInternamiento = 
+	(SELECT o.IdOrdenInternamiento FROM OrdenInternamiento_Bitacora o
+	WHERE o.IdOrdenInternamientoBitacora = @n_OrdenInternamientoBitacora))
+	
+--UPDATE Paciente
+--SET nombre = @v_Nombre, apellido_paterno = @v_ApellidoPaterno,
+--	apellido_materno = @v_ApellidoMaterno
+--WHERE dni = @dni
+
+--UPDATE OrdenInternamiento
+--SET IdHabitacion = @n_idHabitacion
+--WHERE IdOrdenInternamiento = 
+--	(SELECT o.IdOrdenInternamiento FROM OrdenInternamiento_Bitacora o
+--	WHERE o.IdOrdenInternamientoBitacora = @n_OrdenInternamientoBitacora)
+
+
+END
+GO
+
+create procedure [dbo].[pa_AltaMedica_set_insert]
+@n_idOrdenInternamiento int
+--@v_Numero varchar(15)
+--,@n_idDoctor int
+--,@v_idPaciente varchar(8)
+--,@n_idHabitacion int
+--,@n_idCama int
+--,@v_estado varchar(3)
+,@v_descripcion varchar(255)
+AS
+BEGIN
+DECLARE @Identity int
+
+--INSERT INTO [dbo].[OrdenInternamiento]
+--(Numero, idDoctor, idPaciente, idHabitacion, idCama, Estado)
+--VALUES (@v_Numero, @n_idDoctor, @v_idPaciente, @n_idHabitacion, @n_idCama, @v_estado)
+
+--SET @Identity = (SELECT @@identity)
+--print @Identity
+INSERT INTO [dbo].[OrdenInternamiento_Bitacora]
+(IdOrdenInternamiento, Fecha, EstadoPaciente, Descripcion, Estado)
+VALUES(@n_idOrdenInternamiento, GETDATE(), '001', @v_descripcion, '001')
+
+SELECT @@rowcount
+END
+go
+
+create procedure [dbo].[pa_BuscarAltaMedica]
+@v_nombre varchar(255)
+,@v_apellido varchar(255)
+,@v_apellido_materno varchar(255)
+AS
+BEGIN
+
+
+SELECT 
+CASE WHEN EXISTS(
+SELECT b.IdOrdenInternamiento
+FROM OrdenInternamiento_Bitacora b
+INNER JOIN OrdenInternamiento o ON b.IdOrdenInternamiento = o.IdOrdenInternamiento
+WHERE o.IdPaciente IN (
+SELECT p2.dni 
+FROM Paciente p2
+WHERE p2.nombre LIKE '%'+@v_nombre+'%' OR p2.apellido_paterno LIKE '%'+@v_apellido+'%' OR 
+p2.apellido_materno LIKE '%'+@v_apellido_materno+'%'
+) AND o.Estado = '001' AND b.Estado = '001'
+)
+THEN (
+SELECT b9.IdOrdenInternamientoBitacora
+FROM OrdenInternamiento_Bitacora b9 
+INNER JOIN OrdenInternamiento o ON b9.IdOrdenInternamiento = o.IdOrdenInternamiento
+WHERE o.IdPaciente IN (
+SELECT p2.dni 
+FROM Paciente p2
+WHERE p2.nombre LIKE '%'+@v_nombre+'%' OR p2.apellido_paterno LIKE '%'+@v_apellido+'%' OR 
+p2.apellido_materno LIKE '%'+@v_apellido_materno+'%'
+) AND o.Estado = '001' AND b9.Estado = '001')
+ELSE 0
+END AS idOrdenInternamientoBitacora
+,p9.dni
+,p9.nombre + ' ' + p9.apellido_paterno + ' ' + p9.apellido_materno AS nombre
+,(SELECT o5.Fecha FROM OrdenInternamiento_Bitacora o5 
+		WHERE o5.Estado = '001'
+		AND o5.IdOrdenInternamiento =(SELECT o.IdOrdenInternamiento FROM OrdenInternamiento o WHERE o.IdPaciente = p9.dni
+		AND o.Estado = '001'))
+		AS Fecha
+,o11.IdOrdenInternamiento
+,
+CASE WHEN EXISTS(
+SELECT b.IdOrdenInternamiento
+FROM OrdenInternamiento_Bitacora b 
+INNER JOIN OrdenInternamiento o ON b.IdOrdenInternamiento = o.IdOrdenInternamiento
+WHERE o.IdPaciente IN (
+SELECT p2.dni 
+FROM Paciente p2
+WHERE p2.nombre LIKE '%'+@v_nombre+'%' OR p2.apellido_paterno LIKE '%'+@v_apellido+'%' OR 
+p2.apellido_materno LIKE '%'+@v_apellido_materno+'%'
+) AND o.Estado = '001' AND b.Estado = '001'
+)
+THEN 'ActualizarAltaMedica'
+ELSE 'RegistrarAltaMedica'
+END AS Accion
+,
+CASE WHEN EXISTS(
+SELECT b.IdOrdenInternamiento
+FROM OrdenInternamiento_Bitacora b 
+INNER JOIN OrdenInternamiento o ON b.IdOrdenInternamiento = o.IdOrdenInternamiento
+WHERE o.IdPaciente IN (
+SELECT p2.dni 
+FROM Paciente p2
+WHERE p2.nombre LIKE '%'+@v_nombre+'%' OR p2.apellido_paterno LIKE '%'+@v_apellido+'%' OR 
+p2.apellido_materno LIKE '%'+@v_apellido_materno+'%'
+) AND o.Estado = '001' AND b.Estado = '001'
+)
+THEN 'Actualizar'
+ELSE 'Registrar'
+END AS Accion_texto
+FROM OrdenInternamiento o11
+INNER JOIN Paciente p9 ON o11.IdPaciente = p9.dni
+WHERE IdPaciente IN (
+SELECT p2.dni 
+FROM Paciente p2
+WHERE p2.nombre LIKE '%'+@v_nombre+'%' OR p2.apellido_paterno LIKE '%'+@v_apellido+'%' OR 
+p2.apellido_materno LIKE '%'+@v_apellido_materno+'%'
+) AND Estado = '001'
+
+END
+go
+
+create procedure [dbo].[pa_BuscarPaciente]
+@n_OrdenInternamientoBitacora int
+AS
+BEGIN
+
+SELECT b.IdOrdenInternamientoBitacora, 
+	p.nombre
+	,p.apellido_paterno
+	,p.apellido_materno
+	,b.IdOrdenInternamiento
+	,h.Numero AS idHabitacion
+	,b.Fecha
+	,b.Descripcion
+	FROM OrdenInternamiento_Bitacora b
+INNER JOIN OrdenInternamiento o ON b.IdOrdenInternamiento = o.IdOrdenInternamiento
+INNER JOIN Habitacion h ON o.IdHabitacion = h.IdHabitacion
+INNER JOIN Paciente p ON o.IdPaciente = p.dni
+WHERE b.IdOrdenInternamientoBitacora = @n_OrdenInternamientoBitacora
+
+END
+go
+
+create procedure [dbo].[pa_BuscarPaciente_Registro] 
+@n_OrdenInternamiento int
+AS
+BEGIN
+
+SELECT o.IdOrdenInternamiento, 
+	p.nombre + ' ' + p.apellido_paterno + ' ' + p.apellido_materno AS NombrePaciente
+	,d.nombre + ' ' + d.apellido_paterno + ' ' + d.apellido_materno AS NombreDoctor
+	,h.Numero AS Habitacion
+	, c.Marca AS Cama
+	FROM OrdenInternamiento o
+INNER JOIN Paciente p ON o.IdPaciente = p.dni
+INNER JOIN Habitacion h ON o.IdHabitacion = h.IdHabitacion
+INNER JOIN Doctor d ON o.IdDoctor = d.IdDoctor
+INNER JOIN Cama c ON o.IdCama = c.IdCama
+WHERE o.IdOrdenInternamiento = @n_OrdenInternamiento
+
+END
+go
+
+create procedure [dbo].[pa_ObtenerDoctores]
+AS
+BEGIN
+
+SELECT IdDoctor, nombre + ' ' + apellido_paterno + ' ' + apellido_materno AS NombreDoctor
+	FROM Doctor
+END
+go
+
+create procedure [dbo].[pa_ObtenerPacientes]
+AS
+BEGIN
+
+SELECT dni, nombre + ' ' + apellido_paterno + ' ' + apellido_materno AS NombrePaciente
+	FROM Paciente
+END
+go

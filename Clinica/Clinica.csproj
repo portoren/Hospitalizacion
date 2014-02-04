@@ -185,6 +185,7 @@
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\CamaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MantenerAltaMedicaController.cs" />
     <Compile Include="Controllers\OperacionController.cs" />
     <Compile Include="Controllers\OrdenInternamientoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -325,6 +326,10 @@
     <Content Include="Views\Operacion\Generar.cshtml" />
     <Content Include="Views\Operacion\Pausa.cshtml" />
     <Content Include="Views\Operacion\Salida.cshtml" />
+    <Content Include="Views\MantenerAltaMedica\ActualizarAltaMedica.cshtml" />
+    <Content Include="Views\MantenerAltaMedica\BuscarAltaMedica.cshtml" />
+    <Content Include="Views\MantenerAltaMedica\Index.cshtml" />
+    <Content Include="Views\MantenerAltaMedica\RegistrarAltaMedica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
