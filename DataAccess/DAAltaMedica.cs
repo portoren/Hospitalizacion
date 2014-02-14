@@ -82,8 +82,8 @@ namespace DataAccess
             List<BEAltaMedica> ListaBusqueda = new List<BEAltaMedica>();
             try
             {
-                if (nombre.Trim().Length > 0)
-                {
+                //if (nombre.Trim().Length > 0)
+                //{
                     using (DbCommand dbCmd = this.db.GetStoredProcCommand("[pa_BuscarAltaMedica]"))
                     {
                         string[] NombreCompleto = nombre.Split(' ');
@@ -106,7 +106,7 @@ namespace DataAccess
                                 });
                         }
                     }
-                }
+                //}
             }
             catch (Exception)
             {
