@@ -305,6 +305,15 @@ oir.Cantidad, oir.Observacion from OrdenInternamiento_Recurso oir where oir.IdOr
                                 if (this.db.ExecuteNonQuery(dbCmd, dbTr) < 1)
                                     isOK = false;
                             }
+                        else if (objBEr.IdOrdenInternamientoRecurso != 0 && objBEr.Indicador != 1)
+                            using (DbCommand dbCmd = this.db.GetSqlStringCommand("update OrdenInternamiento_Recurso set Cantidad = @n_Cantidad where IdOrdenInternamientoRecurso = @n_IdOrdenInternamientoRecurso"))
+                            {
+                                this.db.AddInParameter(dbCmd, "@n_IdOrdenInternamientoRecurso", DbType.Int32, objBEr.IdOrdenInternamientoRecurso);
+                                this.db.AddInParameter(dbCmd, "@n_Cantidad", DbType.Int32, objBEr.Cantidad);
+
+                                if (this.db.ExecuteNonQuery(dbCmd, dbTr) < 1)
+                                    isOK = false;
+                            }
                         else if (objBEr.Indicador == 1)
                             using (DbCommand dbCmd = this.db.GetSqlStringCommand("delete from OrdenInternamiento_Recurso where IdOrdenInternamientoRecurso = @n_IdOrdenInternamientoRecurso"))
                             {

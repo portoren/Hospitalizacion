@@ -7,7 +7,7 @@
 
 <script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
 
-<h2>Búsqueda de Bitacora</h2>
+<h2>Búsqueda de Bitácora</h2>
 @using (Html.BeginForm())
 {
     <div class="editor-label">
@@ -24,23 +24,24 @@
 
 <p>@ViewBag.Mensaje</p>
 
-<table border="1">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PacienteNombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DoctorNombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Numero)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.HabitacionNombre)
-            </th>*@
-        <th>
+@if (Model.Count<BusinessEntities.BEOrdenInternamiento>() > 0) {
 
-        </th>
+<div class="TablaListadoGH">
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.PacienteNombre)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.DoctorNombre)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Numero)
+        </td>
+        @*<td>
+                @Html.DisplayNameFor(model => model.HabitacionNombre)
+            </td>*@
+        <td></td>
     </tr>
 
     @foreach (var item in Model)
@@ -65,3 +66,5 @@
     }
 
 </table>
+</div>
+}

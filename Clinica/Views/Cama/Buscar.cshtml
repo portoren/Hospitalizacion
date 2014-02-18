@@ -27,38 +27,47 @@
     </div>
     
     <input type="submit" value="Buscar" />
-    
+}
 <div>
     @Html.ActionLink("Regresar", "Index")
 </div>
     
     <p>@ViewBag.Mensaje</p>
-    
+
+@if (Model.Count<BusinessEntities.BECama>() > 0) {
+
+<div class="TablaListadoGH" >
 <table>
     <tr>
-        <th>
+        <td>
+            #
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.MarcaNombre)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.TipoCamaNombre)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.ModoOperacionNombre)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.TipoColchonNombre)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.ListaAccesorios)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayNameFor(model => model.EstadoNombre)
-        </th>
-        <th></th>
+        </td>
+        <td></td>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCama)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.MarcaNombre)
         </td>
@@ -91,4 +100,5 @@
 }
 
 </table>
+</div>
 }

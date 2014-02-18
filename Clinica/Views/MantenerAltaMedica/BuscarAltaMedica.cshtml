@@ -20,27 +20,27 @@
 
 <p>@ViewBag.Mensaje</p>
 
-<table border="1" width="100%">
-    @if (Model.Count() > 0)
-    {
+@if (Model.Count() > 0) {
+
+<div class="TablaListadoGH">
+<table>
         <tr>
-            <th>
-                <span>Codigo de Paciente</span>
-            </th>
-            <th>
-                <span>Nombre</span>
-            </th>
-            <th>
-                <span>Orden Internamiento</span>
-            </th>
-            <th>
-                <span>Fecha</span>
-            </th>
-            <th>
+            <td>
+                Codigo de Paciente
+            </td>
+            <td>
+                Nombre
+            </td>
+            <td>
+                Orden Internamiento
+            </td>
+            <td>
+                Fecha
+            </td>
+            <td>
                 Indicaciones Medicas
-            </th>
+            </td>
         </tr>
-    }
     @foreach (var item in Model)
     {
         <tr>
@@ -70,3 +70,5 @@
         </tr>
     }
 </table>
+</div>
+}

@@ -123,13 +123,28 @@ namespace Clinica.Controllers
                     try
                     {
                         intCantidad = int.Parse(Cantidad);
+
+                        if (intCantidad < 1)
+                            throw new ApplicationException("La cantidad debe ser mayor o igual a 1");
                     }
                     catch (Exception)
                     {
                         throw new ApplicationException("Debe ingresar la cantidad valida");
                     }
 
-                    oi.Recursos.Add(new BEOrdenInternamientoRecurso(oi.IdOrdenInternamiento, intCantidad, Recurso, strRecurso));
+                    bool isExiste = false;
+                    foreach(BEOrdenInternamientoRecurso recurso in oi.Recursos)
+                    {
+                        if (recurso.Recurso.Equals(Recurso))
+                        {
+                            recurso.Cantidad += intCantidad;
+                            isExiste = true;
+
+                            break;
+                        }
+                    }
+                    if (!isExiste)
+                        oi.Recursos.Add(new BEOrdenInternamientoRecurso(oi.IdOrdenInternamiento, intCantidad, Recurso, strRecurso));
 
                     Session["lista"] = oi.Recursos;
                 }
@@ -238,13 +253,28 @@ namespace Clinica.Controllers
                     try
                     {
                         intCantidad = int.Parse(Cantidad);
+
+                        if (intCantidad < 1)
+                            throw new ApplicationException("La cantidad debe ser mayor o igual a 1");
                     }
                     catch (Exception)
                     {
                         throw new ApplicationException("Debe ingresar la cantidad valida");
                     }
 
-                    oi.Recursos.Add(new BEOrdenInternamientoRecurso(oi.IdOrdenInternamiento, intCantidad, Recurso, strRecurso));
+                    bool isExiste = false;
+                    foreach (BEOrdenInternamientoRecurso recurso in oi.Recursos)
+                    {
+                        if (recurso.Recurso.Equals(Recurso) && recurso.Indicador != 1)
+                        {
+                            recurso.Cantidad += intCantidad;
+                            isExiste = true;
+
+                            break;
+                        }
+                    }
+                    if (!isExiste)
+                        oi.Recursos.Add(new BEOrdenInternamientoRecurso(oi.IdOrdenInternamiento, intCantidad, Recurso, strRecurso));                    
 
                     Session["lista"] = oi.Recursos;
                 }

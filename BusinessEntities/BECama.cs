@@ -17,7 +17,7 @@ namespace BusinessEntities
 
         [Required(ErrorMessage = "Se debe ingresar el modelo.")]
         [Display(Name = "Modelo")]
-        [StringLength(30, ErrorMessage = "La longitud del texto para el modelo no puede ser mayor a 30 caracteres.")]
+        [StringLength(50, ErrorMessage = "La longitud del texto para el modelo no puede ser mayor a 50 caracteres.")]
         public string Modelo { get; set; }
 
         [Required(ErrorMessage = "Se debe seleccionar el tipo de cama.")]
