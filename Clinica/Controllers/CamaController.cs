@@ -53,7 +53,7 @@ namespace Clinica.Controllers
 
             try
             {
-                string strTipoCama = form["paciente"];
+                string strTipoCama = form["TipoCama"];
                 string strEstadoServicio = form["EstadoServicio"];
 
                 lista = new BLCama().Buscar(strTipoCama, strEstadoServicio);
